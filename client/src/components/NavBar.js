@@ -12,7 +12,7 @@ export default ({ session }) => {
     <AppBar position="static" color="black">
         <Toolbar>
           <Typography variant="title" color="inherit">
-          {session && session.getCurrentUser ? <NavBarAuth session={session} /> : <NavBarUnAuth />}
+            {session && session.getCurrentUser ? <NavBarAuth session={session} /> : <NavBarUnAuth />}
           </Typography>
         </Toolbar>
       </AppBar>
@@ -32,21 +32,11 @@ const NavBarUnAuth = () => (
 const NavBarAuth = ({session}) => (
   <Fragment>
     <ul>
-      <li>
-        <NavLink exact to="/">Home</NavLink>
-      </li>
-      <li>
-        <NavLink to="/search">Search</NavLink>
-      </li>
-      <li>
-        <NavLink to="/recipe/add">Add Recipe</NavLink>
-      </li>
-      <li>
-        <NavLink to="/profile">Profile</NavLink>
-      </li>
-      <li>
-        <Signout />
-      </li>
+      <li><NavLink exact to="/">Home</NavLink></li>
+      <li><NavLink to="/search">Search</NavLink></li>
+      <li><NavLink to="/recipe/add">Add Recipe</NavLink></li>
+      <li><NavLink to="/profile">Profile</NavLink></li>
+      <li><Signout /></li>
     </ul>
     <h4>{`Welcome, ${session.getCurrentUser.username}`}</h4>
   </Fragment>
