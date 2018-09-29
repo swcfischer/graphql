@@ -1,6 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom';
 import { ApolloConsumer } from 'react-apollo';
+import { Button } from '@material-ui/core';
 
 const handleSignOut = (client, history) => {
   localStorage.setItem('token', '')
@@ -13,9 +14,12 @@ const SignOut = ({ history }) => {
     <ApolloConsumer>
       {client => {
         return (
-          <button onClick={(event) => {
+          <Button
+            variant="contained"
+            color="inherit"
+            onClick={(event) => {
             handleSignOut(client, history)
-          }}>Sign Out</button>
+          }}>Sign Out</Button>
         )
       }}
     </ApolloConsumer>

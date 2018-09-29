@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
-
+import { TextField, Button } from '@material-ui/core'
 import { SIGNIN_USER } from '../queries';
 import Error from './Error';
+import backgroundImage from './background.jpeg';
 
 const initialState = {
   username: '',
@@ -43,7 +44,9 @@ class Signin extends Component {
   render() {
     const { password, username } = this.state;
     return (
-      <div className="app">
+      <div 
+        className="app"
+      >
         <h1 className="app">Sign In</h1>
         <Mutation mutation={SIGNIN_USER} variables={{username, password}}>
 
@@ -55,29 +58,35 @@ class Signin extends Component {
             }
 
             return (
-              <form className="form" onSubmit={(event) => {
+              <form className="form"
+                noValidate
+                autoComplete="off"
+              onSubmit={(event) => {
                 this.handleSubmit(event, signinUser)
               }}>
-                <input 
-                  type="text" 
+                <TextField
+                  label="Username"
+                  type="text"
+                  margin="normal"
                   name="username" 
-                  placeholder="Username"
                   value={username}
                   onChange={this.handleChange} 
                 />
-                <input 
-                type="password" 
-                name="password"
-                placeholder="Password"
-                value={password}
-                onChange={this.handleChange} 
+                <TextField
+                  label="Password"
+                  type="password"
+                  name="password" 
+                  value={password}
+                  onChange={this.handleChange} 
+                  margin="normal"
                 />
-                <button 
+                <Button 
                   type="submit" 
                   className="button-primary"
+                  variant="contained"
                   disabled={loading || this.validateForm()}
                 >Submit
-                </button>
+                </Button>
                 {error && <Error error={error} />}
               </form>
             )

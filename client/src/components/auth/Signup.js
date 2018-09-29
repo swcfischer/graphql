@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
+import { TextField, Typography, Button, FormControl, RadioGroup, FormControlLabel, Radio, FormLabel  } from '@material-ui/core';
 
 import { SIGNUP_USER } from '../queries';
 import Error from './Error';
@@ -9,7 +10,8 @@ const initialState = {
   username: '',
   email: '',
   password: '',
-  passwordConfirmation: ''
+  passwordConfirmation: '',
+  console: 'PS4'
 }
 
 class Signup extends Component {
@@ -42,11 +44,11 @@ class Signup extends Component {
     this.setState({ ...initialState })
   }
   render() {
-    const { email, password, username, passwordConfirmation } = this.state;
+    const { email, password, username, passwordConfirmation, console } = this.state;
     return (
       <div className="app">
-        <h1 className="app">Sign Up</h1>
-        <Mutation mutation={SIGNUP_USER} variables={{username, password, email}}>
+        <Typography variant="display1">Sign Up</Typography>
+        <Mutation mutation={SIGNUP_USER} variables={{username, password, email, console}}>
 
           {( signupUser, {data, loading, error}) => {
             if (loading) {
@@ -56,43 +58,81 @@ class Signup extends Component {
             }
 
             return (
-              <form className="form" onSubmit={(event) => {
-                this.handleSubmit(event, signupUser)
-              }}>
-                <input 
-                  type="text" 
+              <form
+                noValidate
+                autoComplete="off"
+                className="form" 
+                onSubmit={(event) => {
+                  this.handleSubmit(event, signupUser)
+                }}
+              >
+              <TextField
+                  label="Username"
+                  type="text"
+                  margin="normal"
                   name="username" 
-                  placeholder="Username"
                   value={username}
                   onChange={this.handleChange} 
                 />
-                <input 
+                <TextField
+                  label="Email"
                   type="email"
-                  name="email"
-                  placeholder="Email"
+                  margin="normal"
+                  name="email" 
                   value={email}
                   onChange={this.handleChange} 
                 />
-                <input 
-                type="password" 
-                name="password"
-                placeholder="Password"
-                value={password}
-                onChange={this.handleChange} 
+                <TextField
+                  label="Password"
+                  type="password"
+                  name="password" 
+                  value={password}
+                  onChange={this.handleChange} 
+                  margin="normal"
                 />
-                <input
+                <TextField
+                  label="Confirm Password"
                   type="password"
                   name="passwordConfirmation"
-                  placeholder="Confirm Password"
                   value={passwordConfirmation}
-                  onChange={this.handleChange}
+                  onChange={this.handleChange} 
+                  margin="normal"
                 />
-                <button 
+                <FormControl component="fieldset">
+                  <FormLabel component="legend">Console</FormLabel>
+                  <RadioGroup
+                    aria-label="console"
+                    name="console"
+                    value={this.state.console}
+                    onChange={this.handleChange}
+                  >
+                    <FormControlLabel
+                      value="PS4"
+                      control={<Radio color="primary" />}
+                      label="PS4"
+                      labelPlacement="start"
+                    />
+                    <FormControlLabel
+                      value="Switch"
+                      control={<Radio color="primary" />}
+                      label="Switch"
+                      labelPlacement="start"
+                    />
+                    <FormControlLabel
+                      value="Xbox One"
+                      control={<Radio color="primary" />}
+                      label="Xbox One"
+                      labelPlacement="start"
+                    />
+                  </RadioGroup>
+                </FormControl>
+                <Button
+                  variant="contained"
                   type="submit" 
                   className="button-primary"
                   disabled={loading || this.validateForm()}
                 >Submit
-                </button>
+                </Button>
                 {error && <Error error={error} />}
               </form>
             )

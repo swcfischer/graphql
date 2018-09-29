@@ -56,7 +56,6 @@ app.use(
   graphqlExpress(({ currentUser }) => ({ 
     schema,
     context: {
-      Recipe,
       User,
       currentUser
     }

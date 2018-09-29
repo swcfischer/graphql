@@ -1,4 +1,19 @@
 ul > li {
   display: inline-block;
-  padding: 30px;
+  padding: 0 30px;
+}
+
+ul > li a {
+  color: #fff;
+  font-weight: 100;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+ul > li a:hover {
+  text-decoration: underline;
+}
+
+.app-bar {
+  background: #0e3e5b !important;
 }

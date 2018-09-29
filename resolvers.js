@@ -13,10 +13,6 @@ exports.resolvers = {
         return null;
       }
       const user = await User.findOne({ username: currentUser.username })
-        .populate({
-          path: 'favorites',
-          model: 'Recipe'
-        })
       return user;
 
     }
@@ -38,7 +34,7 @@ exports.resolvers = {
       return { token: createToken(user, process.env.SECRET, '1hr')};
 
     },
-    signupUser: async (root, { username, email, password }, { User }) => {
+    signupUser: async (root, { username, email, password, console }, { User }) => {
       const user = await User.findOne({ username});
       if (user) {
         throw new Error('User Already exists');
@@ -46,7 +42,8 @@ exports.resolvers = {
       const newUser = await new User({
         username,
         email,
-        password
+        password,
+        console
       }).save()
       
       return { token: createToken(newUser, process.env.SECRET, "1hr") }

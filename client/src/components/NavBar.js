@@ -9,8 +9,11 @@ import './NavBar.css';
 export default ({ session }) => {
   return (
     <div>
-    <AppBar position="static" color="black">
+    <AppBar className="app-bar" position="static">
         <Toolbar>
+          <Typography variant="title" style={{ color: '#FFC107', fontWeight: 'bold'}}>
+            BRAWL HOLLA !
+          </Typography>
           <Typography variant="title" color="inherit">
             {session && session.getCurrentUser ? <NavBarAuth session={session} /> : <NavBarUnAuth />}
           </Typography>
@@ -34,10 +37,9 @@ const NavBarAuth = ({session}) => (
     <ul>
       <li><NavLink exact to="/">Home</NavLink></li>
       <li><NavLink to="/search">Search</NavLink></li>
-      <li><NavLink to="/recipe/add">Add Recipe</NavLink></li>
       <li><NavLink to="/profile">Profile</NavLink></li>
       <li><Signout /></li>
     </ul>
-    <h4>{`Welcome, ${session.getCurrentUser.username}`}</h4>
+    <h4 className="app">{`Welcome, ${session.getCurrentUser.username}`}</h4>
   </Fragment>
 );

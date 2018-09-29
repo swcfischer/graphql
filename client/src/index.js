@@ -15,7 +15,7 @@ import NavBar from './components/NavBar';
 import Profile from './components/Profile/Profile';
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4444/graphql',
+  uri: 'http://localhost:3001/graphql',
   fetchOptions: {
     credentials: 'include'
   },

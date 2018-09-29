@@ -6,12 +6,12 @@ exports.typeDefs = `
     password: String!
     email: String!
     joinDate: String
+    console: String!
   }
 
   type Token {
     token: String!
   }
-
 
   type Query {
     getCurrentUser: User
